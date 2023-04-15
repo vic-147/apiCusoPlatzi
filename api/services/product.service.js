@@ -61,6 +61,19 @@ class ProductsService {
     return this.products[index];
   }
 
+  async updateAll(id, changes) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw boom.notFound('product not found');
+    }
+    const product = this.products[index];
+    this.products[index] = {
+      ...product,
+      ...changes,
+    };
+    return this.products[index];
+  }
+
   async delete(id) {
     const index = this.products.findIndex((item) => item.id === id);
     if (index === -1) {

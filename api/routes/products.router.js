@@ -4,6 +4,7 @@ const validatorHnadler = require('../middlewares/validator.handler');
 const {
   createProductSchema,
   updateProductSchema,
+  updateAllProductSchema,
   getProductSchema,
   deleteProductSchema,
 } = require('../schemas/product.schema');
@@ -44,6 +45,22 @@ router.patch(
   '/:id',
   validatorHnadler(getProductSchema, 'params'),
   validatorHnadler(updateProductSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const product = await service.update(id, body);
+      res.json({ product });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.put(
+  '/:id',
+  validatorHnadler(getProductSchema, 'params'),
+  validatorHnadler(updateAllProductSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;

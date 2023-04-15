@@ -17,6 +17,12 @@ const updateProductSchema = Joi.object({
   image: image,
 });
 
+const updateAllProductSchema = Joi.object({
+  name: name.required(),
+  price: price.required(),
+  image: image.required(),
+});
+
 const getProductSchema = Joi.object({
   id: id.required(),
 });
@@ -25,4 +31,4 @@ const deleteProductSchema = Joi.object({
   id: id.required(),
 });
 
-module.exports = { createProductSchema, updateProductSchema, getProductSchema, deleteProductSchema };
+module.exports = { createProductSchema, updateProductSchema, getProductSchema, deleteProductSchema, updateAllProductSchema };
